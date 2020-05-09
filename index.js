@@ -134,8 +134,23 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+let inningArray=[1,2,3,4,5, 6, 7, 8, 9];
+
+function scoreboard(callback, inningNum ) {
+  
+  var scoreByInning= [];
+
+  inningNum.forEach(
+    (value, index)=>{
+      console.log(`Value per loop: ${value},  Index per loop: ${index}`)
+      let awayTeamScore= callback*value;
+      let homeTeamScore= callback*inningNum[index];
+      scoreByInning.push(` ${inningNum[index]} inning: ${homeTeamScore} - ${awayTeamScore}` );
+    }
+  )
+
+ return scoreByInning;
 }
+console.log (scoreboard(inning(), inningArray));
 
 
