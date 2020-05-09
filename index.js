@@ -28,9 +28,28 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+  In Counter 1, the variable 'count' is contained in the scope of the function countMaker,
+  and the 2nd, lesser function 'counter()' uses it, to add 1 to the variable 'count' each 
+  time the function is used. The value will build on itself by 1 each time the funcion runs. 
+
+  In conter2, the variable count is in the global scope of the function "counter2", and 
+  because of that, and because there is no inner function that does anything else to the
+  variable "count", "count" will reset back to zero after the function has been used. 
+  Each time the function is used, the variable to will set at 0, always only equaling 1 after
+  it is run. 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * They both have closure because the functions have access to the elements they 
+ * need in order to run. Counter 1 has variables within its functions scope. Counter 2
+ * has a global varaible within it's scope. 
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * Counter1 would be best if you needed to manipulate a number several times in order
+ * to get the correct outcome: if you needed to add to the beginning number, then multiply the
+ * newly created number, etc. 
+ * Counter2 would be best if you needed your number to always start at zero when using
+ * the function. 
  *
 */
 
