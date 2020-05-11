@@ -28,9 +28,28 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+  In Counter 1, the variable 'count' is contained in the scope of the function countMaker,
+  and the 2nd, lesser function 'counter()' uses it, to add 1 to the variable 'count' each 
+  time the function is used. The value will build on itself by 1 each time the funcion runs. 
+
+  In conter2, the variable count is in the global scope of the function "counter2", and 
+  because of that, and because there is no inner function that does anything else to the
+  variable "count", "count" will reset back to zero after the function has been used. 
+  Each time the function is used, the variable to will set at 0, always only equaling 1 after
+  it is run. 
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * They both have closure because the functions have access to the elements they 
+ * need in order to run. Counter 1 has variables within its functions scope. Counter 2
+ * has a global varaible within it's scope. 
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ * 
+ * Counter1 would be best if you needed to manipulate a number several times in order
+ * to get the correct outcome: if you needed to add to the beginning number, then multiply the
+ * newly created number, etc. 
+ * Counter2 would be best if you needed your number to always start at zero when using
+ * the function. 
  *
 */
 
@@ -54,17 +73,21 @@ function counter2() {
 
 /* Task 2: inning() 
 
-Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
+Write a function called `inning` that generates a random number of points that a team 
+scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
 
-    /*Code Here*/
+function inning(){
+ let randomNum=Math.round(Math.random()*2);
 
-}
+};
+inning();
 
 /* Task 3: finalScore()
 
-Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
+Write a higher order function called `finalScore` that accepts the callback function
+ `inning` (from above) and a number of innings and and returns the final score of the
+  game in the form of an object.
 
 For example, 
 
@@ -76,11 +99,19 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(callback, inningNum){
+ var scores={};
+ 
+ let homeTeamGameScore=callback*inningNum;
+ let awayTeamGameScore=callback*inningNum;
 
-  /*Code Here*/
+ scores.Home = homeTeamGameScore;
+ scores.Away= awayTeamGameScore;
 
-}
+
+ return scores;
+};
+finalScore(inning(), 2);
 
 /* Task 4: 
 
@@ -103,8 +134,23 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+let inningArray=[1,2,3,4,5, 6, 7, 8, 9];
+
+function scoreboard(callback, inningNum ) {
+  
+  var scoreByInning= [];
+
+  inningNum.forEach(
+    (value, index)=>{
+      console.log(`Value per loop: ${value},  Index per loop: ${index}`)
+      let awayTeamScore= callback*value;
+      let homeTeamScore= callback*inningNum[index];
+      scoreByInning.push(` ${inningNum[index]} inning: ${homeTeamScore} - ${awayTeamScore}` );
+    }
+  )
+
+ return scoreByInning;
 }
+console.log (scoreboard(inning(), inningArray));
 
 
