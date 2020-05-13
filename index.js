@@ -79,7 +79,7 @@ scored in an inning. This should be a whole number between 0 and 2. */
 
 function inning(){
  let randomNum=Math.round(Math.random()*2);
-
+ return randomNum;
 };
 inning();
 
@@ -111,7 +111,10 @@ function finalScore(callback, inningNum){
 
  return scores;
 };
-finalScore(inning(), 2);
+finalScore(inning(), 2); 
+//(I'm calling the function before entering it into the new one 'inning()' 
+//so when it goes in, it's already a number. For it to be a callback, I'd have to initiate it 
+//inside the new function 'callback()'  )
 
 /* Task 4: 
 
